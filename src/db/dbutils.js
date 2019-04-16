@@ -1,7 +1,7 @@
 const storeTableName = 'store';
 
-function setup(db) {
-  return db.run(`
+function setup(DB) {
+  return DB.run(`
     CREATE TABLE
     IF NOT EXISTS ${storeTableName} (
       user_id TEXT,
@@ -13,8 +13,8 @@ function setup(db) {
   `);
 }
 
-function setItem({ db, key, value, userId, serverId, channelId }) {
-  return db.run(`
+function setItem({ DB, key, value, userId, serverId, channelId }) {
+  return DB.run(`
     INSERT OR REPLACE
     INTO ${storeTableName} (
       user_id,
@@ -37,13 +37,13 @@ function setItem({ db, key, value, userId, serverId, channelId }) {
   });
 }
 
-function getItem({ db, key, userId=null, serverId=null, channelId=null }) {
+function getItem({ DB, key, userId=null, serverId=null, channelId=null }) {
   const params = [key];
   if(userId !== null) params.push(userId);
   if(serverId !== null) params.push(serverId);
   if(channelId !== null) params.push(channelId);
 
-  return db.get(`
+  return DB.get(`
     SELECT *
     FROM ${storeTableName}
     WHERE key = ?

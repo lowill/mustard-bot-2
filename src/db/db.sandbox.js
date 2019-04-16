@@ -1,10 +1,10 @@
-const db_name = 'test_db_aaaa.sqlite3';
-const db = require('./db').getConnection(db_name);
+const DB_name = 'test_DB_aaaa.sqlite3';
+const DB = require('./DB').getConnection(DB_name);
 
 const tableNamePeople = `people`;
 
 function init() {
-  return db.run(`
+  return DB.run(`
     CREATE TABLE
     IF NOT EXISTS
     ${tableNamePeople} (
@@ -42,7 +42,7 @@ init()
     const people = [bob, jenny, jim];
 
     function addPerson({ name, age, food, profession }) {
-      db.run(`
+      DB.run(`
         INSERT INTO ${tableNamePeople} (
           name,
           age,
@@ -69,7 +69,7 @@ init()
       WHERE age = ? ${foo != null ? 'AND food = ?' : ''}
     `;
     console.log(query);
-    db.all(query, [28, null])
+    DB.all(query, [28, null])
     .then(results => console.log(results))
     .catch(`Failed to insert......`);
   });

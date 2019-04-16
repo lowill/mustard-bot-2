@@ -33,7 +33,7 @@ function getConnection(dbName='mustard_bot.sqlite') {
   });
 
   return {
-    db: connection,
+    DB: connection,
     run,
     get,
     all,
