@@ -1,8 +1,8 @@
 const sqlite = require('sqlite3').verbose();
 
-function getConnection(dbName='mustard_bot.sqlite') {
+function getConnection(DBName='mustard_bot.sqlite') {
 
-  const connection = new sqlite.Database(dbName);
+  const connection = new sqlite.Database(DBName);
 
   const run = (sql, params) => new Promise((resolve, reject) => {
     connection.run(sql, params, err => {
@@ -40,8 +40,6 @@ function getConnection(dbName='mustard_bot.sqlite') {
     close
   };
 }
-
-
 
 module.exports = getConnection();
 module.exports.getConnection = getConnection;
