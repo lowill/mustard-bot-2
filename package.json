@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec -w --recursive ./src/**/*.test.js"
+    "test": "./node_modules/.bin/mocha --reporter spec -w --recursive ./src/**/*.test.js --recursive ./src/**/*.apitest.js"
   },
   "author": "",
   "license": "ISC",
