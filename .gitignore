@@ -78,3 +78,4 @@ channels.json
 AvailableChannels.json
 AvailableRoles.json
 mustard_bot.sqlite
+*.sandbox.js
