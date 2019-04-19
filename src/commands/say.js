@@ -16,7 +16,8 @@ function createExecute(deps) {
     const channelId = args[0].match(/<?#?(\d+)>?/);
     if(channelId === null) throw new Error(`Invalid channel ID.`);
 
-    const channel = client.channels.get(channelId[0]);
+    const channel = client.channels.get(channelId[1]);
+    if(channel == null) throw new Error(`Couldn't find that channel.`);
 
     return channel.send(args.slice(1).join(' '));
 
