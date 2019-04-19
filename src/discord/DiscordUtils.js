@@ -1,4 +1,5 @@
 function resolveUser(client, identifier) {
+
   return new Promise((resolve, reject) => {
     const idMatch = identifier.match(/^\d+$/);
     if(idMatch !== null) {
@@ -6,9 +7,10 @@ function resolveUser(client, identifier) {
       return;
     }
 
-    const discriminatorMatch = identifier.match(/^(.*)#(\d{4})$/g);
+    const discriminatorMatch = identifier.match(/^(.*)#(\d{4})$/);
     if(discriminatorMatch !== null) {
-      resolve(client.users.get(user => user.username === discriminatorMatch[1] && user.discriminator === discriminatorMatch[2]));
+      const user = client.users.find(user => user.username === discriminatorMatch[1] && user.discriminator === discriminatorMatch[2]);
+      resolve(user);
       return;
     }
 
@@ -20,8 +22,22 @@ function resolveUser(client, identifier) {
 
     return reject(`Failed to resolve user.`);
   });
+
+}
+
+function getGuildMember(message) {
+
+  const guild = message.guild;
+  const authorId = message.author.id;
+
+  const guildMember = guild.members.get(authorId);
+  if(guildMember == null) throw new Error('Could not retrieve roles for user.');
+
+  return guildMember;
+  
 }
 
 module.exports = {
-  resolveUser
+  resolveUser,
+  getGuildMember
 };
