@@ -22,7 +22,8 @@ function setupCommands({ DB, Discord, fs, require, pathUtil, projectPath, proces
     commands.set(command.commandName, command);
   });
 
-  const helpCommand = createHelpCommand({ DB, Discord, commands });
+  // TODO: Finish implementing help
+  // const helpCommand = createHelpCommand({ DB, Discord, commands });
 
   return commands;
 
